@@ -15,16 +15,52 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h1 {
     text-align: center;
     color: #333;
+    animation: slideDown 0.5s ease-out 0.2s both;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 #task-form {
     display: flex;
     margin-bottom: 20px;
+    animation: slideUp 0.5s ease-out 0.4s both;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 #task-input {
@@ -32,6 +68,12 @@ h1 {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px 0 0 4px;
+    transition: border-color 0.3s ease;
+}
+
+#task-input:focus {
+    border-color: #28a745;
+    outline: none;
 }
 
 button {
@@ -41,10 +83,16 @@ button {
     border: none;
     border-radius: 0 4px 4px 0;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
     background-color: #218838;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
 }
 
 ul {
@@ -57,6 +105,19 @@ li {
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #eee;
+    transition: all 0.3s ease;
+    animation: fadeInTask 0.3s ease-in;
+}
+
+@keyframes fadeInTask {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 li:last-child {
@@ -65,15 +126,22 @@ li:last-child {
 
 input[type="checkbox"] {
     margin-right: 10px;
+    transition: transform 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+    transform: scale(1.2);
 }
 
 .task-text {
     flex: 1;
+    transition: all 0.3s ease;
 }
 
-.completed {
+.completed .task-text {
     text-decoration: line-through;
     color: #888;
+    transform: scale(0.98);
 }
 
 .delete-btn {
@@ -83,8 +151,22 @@ input[type="checkbox"] {
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+li:hover .delete-btn {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .delete-btn:hover {
     background-color: #c82333;
+    transform: scale(1.1);
+}
+
+.deleting {
+    transform: translateX(100%);
+    opacity: 0;
 }

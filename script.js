@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function addTask(text) {
         const li = document.createElement('li');
+        li.style.opacity = '0';
+        li.style.transform = 'translateX(-20px)';
+
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         const taskText = document.createElement('span');
@@ -28,6 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
         li.appendChild(deleteBtn);
         taskList.appendChild(li);
 
+        // Trigger animation
+        setTimeout(() => {
+            li.style.opacity = '1';
+            li.style.transform = 'translateX(0)';
+        }, 10);
+
         checkbox.addEventListener('change', function() {
             if (this.checked) {
                 taskText.classList.add('completed');
@@ -37,7 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         deleteBtn.addEventListener('click', function() {
-            taskList.removeChild(li);
+            li.classList.add('deleting');
+            setTimeout(() => {
+                if (li.parentNode) {
+                    taskList.removeChild(li);
+                }
+            }, 300);
         });
     }
 });
